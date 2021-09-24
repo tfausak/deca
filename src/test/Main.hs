@@ -14,6 +14,13 @@ main = runTestTTAndExit $ "Deca" ~:
         , Deca.add 10 2 ~?= Deca.Deca 12 0
         , Deca.add 5 5 ~?= Deca.Deca 1 1
         ]
+    , "compare" ~:
+        [ Deca.compare 0 0 ~?= EQ
+        , Deca.compare 1 0 ~?= GT
+        , Deca.compare 0 1 ~?= LT
+        , Deca.compare 1 20 ~?= LT
+        , Deca.compare 10 2 ~?= GT
+        ]
     , "deca" ~:
         [ Deca.deca 0 0 ~?= Deca.Deca 0 0
         ]

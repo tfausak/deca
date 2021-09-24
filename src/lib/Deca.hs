@@ -12,6 +12,9 @@ instance (Integral s, Num e, Ord e) => Num (Deca s e) where
     (+) = add
     (*) = multiply
 
+instance (Num s, Num e, Ord s, Ord e) => Ord (Deca s e) where
+    compare = Deca.compare
+
 abs :: Num s => Deca s e -> Deca s e
 abs (Deca s e) = Deca (Prelude.abs s) e
 
@@ -20,11 +23,16 @@ add x y =
     let (Deca s1 e1, Deca s2 _) = denormalize x y
     in normalize $ Deca (s1 + s2) e1
 
+compare :: (Num s, Num e, Ord s, Ord e) => Deca s e -> Deca s e -> Ordering
+compare x y =
+    let (Deca s1 _, Deca s2 _) = denormalize x y
+    in Prelude.compare s1 s2
+
 deca :: (Integral s, Num e) => s -> e -> Deca s e
 deca s e = normalize $ Deca s e
 
 denormalize :: (Num s, Num e, Ord e) => Deca s e -> Deca s e -> (Deca s e, Deca s e)
-denormalize (Deca s1 e1) (Deca s2 e2) = case compare e1 e2 of
+denormalize (Deca s1 e1) (Deca s2 e2) = case Prelude.compare e1 e2 of
     LT -> denormalize (Deca s1 e1) (Deca (s2 * 10) (e2 - 1))
     EQ -> (Deca s1 e1, Deca s2 e2)
     GT -> denormalize (Deca (s1 * 10) (e1 - 1)) (Deca s2 e2)
