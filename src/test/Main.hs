@@ -63,4 +63,10 @@ main = runTestTTAndExit $ "Deca" ~:
         , Deca.signum (Deca.deca 2 0) ~?= Deca.Deca 1 0
         , Deca.signum (Deca.deca (-2) 0) ~?= Deca.Deca (-1) 0
         ]
+    , "toRational" ~:
+        [ Deca.toRational (Deca.deca 0 0) ~?= 0
+        , Deca.toRational (Deca.deca 1 0) ~?= 1
+        , Deca.toRational (Deca.deca 1 1) ~?= 10
+        , Deca.toRational (Deca.deca 1 (-1)) ~?= 0.1
+        ]
     ]

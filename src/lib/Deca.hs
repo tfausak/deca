@@ -15,6 +15,9 @@ instance (Integral s, Num e, Ord e) => Num (Deca s e) where
 instance (Num s, Num e, Ord s, Ord e) => Ord (Deca s e) where
     compare = Deca.compare
 
+instance (Integral s, Integral e) => Real (Deca s e) where
+    toRational = Deca.toRational
+
 abs :: Num s => Deca s e -> Deca s e
 abs (Deca s e) = Deca (Prelude.abs s) e
 
@@ -55,3 +58,8 @@ normalize (Deca s e) = if s == 0
 
 signum :: (Num s, Num e) => Deca s e -> Deca s e
 signum (Deca s _) = Deca (Prelude.signum s) 0
+
+toRational :: (Integral e, Real s) => Deca s e -> Rational
+toRational (Deca s e) = if e < 0
+    then Prelude.toRational s / (10 ^ Prelude.negate e)
+    else Prelude.toRational s * (10 ^ e)
