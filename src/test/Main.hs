@@ -1,4 +1,4 @@
-import qualified Deca
+import qualified Deca.Internal as Deca
 import Test.HUnit
 
 main :: IO ()

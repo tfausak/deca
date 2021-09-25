@@ -19,7 +19,9 @@ library
     build-depends:
         base >= 4.15.0 && < 4.16
     default-language: Haskell2010
-    exposed-modules: Deca
+    exposed-modules:
+        Deca
+        Deca.Internal
     ghc-options:
         -Weverything
         -Wno-implicit-prelude
