@@ -73,6 +73,11 @@ main = runTestTTAndExit $ "Deca" ~:
         , Deca.normalize (Deca.Deca 10 1) ~?= Deca.Deca 1 2
         , Deca.normalize (Deca.Deca 10 (-1)) ~?= Deca.Deca 1 0
         ]
+    , "properFraction" ~:
+        [ Deca.properFraction 1 ~?= (1, 0)
+        , Deca.properFraction 0.5 ~?= (0, 0.5)
+        , Deca.properFraction 1.5 ~?= (1, 0.5)
+        ]
     , "signum" ~:
         [ Deca.signum 0 ~?= Deca.Deca 0 0
         , Deca.signum 2 ~?= Deca.Deca 1 0

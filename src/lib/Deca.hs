@@ -24,6 +24,9 @@ instance (Num s, Num e, Ord s, Ord e) => Ord (Deca s e) where
 instance (Integral s, Integral e) => Real (Deca s e) where
     toRational = Deca.toRational
 
+instance (Integral s, Integral e) => RealFrac (Deca s e) where
+    properFraction = Deca.properFraction
+
 abs :: Num s => Deca s e -> Deca s e
 abs (Deca s e) = Deca (Prelude.abs s) e
 
@@ -83,6 +86,9 @@ normalize (Deca s e) = if s == 0
     else let (q, r) = quotRem s 10 in if r == 0
         then normalize $ Deca q (e + 1)
         else Deca s e
+
+properFraction :: (Integral s, Integral e, Integral b) => Deca s e -> (b, Deca s e)
+properFraction = fmap Deca.fromRational . Prelude.properFraction . Deca.toRational
 
 signum :: (Num s, Num e) => Deca s e -> Deca s e
 signum (Deca s _) = Deca (Prelude.signum s) 0
