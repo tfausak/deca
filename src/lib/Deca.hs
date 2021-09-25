@@ -1,7 +1,14 @@
-{-# OPTIONS_GHC -Wno-missing-import-lists #-}
+module Deca where
 
-module Deca
-    ( module Deca.Internal
-    ) where
+import qualified Deca.Internal as Internal
 
-import Deca.Internal
+type Deca = Internal.DecaOf Integer Integer
+
+deca :: Integer -> Integer -> Deca
+deca = Internal.deca
+
+significand :: Deca -> Integer
+significand (Internal.Deca s _) = s
+
+exponent :: Deca -> Integer
+exponent (Internal.Deca _ e) = e
