@@ -27,6 +27,7 @@ library
         -Wno-missing-export-lists
         -Wno-missing-exported-signatures
         -Wno-missing-safe-haskell-mode
+        -Wno-monomorphism-restriction
         -Wno-prepositive-qualified-module
         -Wno-safe
     hs-source-dirs: src/lib
